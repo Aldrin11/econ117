@@ -1,0 +1,92 @@
+---
+title: "hw2markdown"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r}
+getwd()
+setwd("~/Desktop/econhw2")
+```
+
+## R Markdown
+Question 2.2.1.a
+```{r}
+data <- read.csv("college_mobility_rates.csv")
+mylist <- list(data$name)
+print(lengths(mylist))
+```
+Question 2.2.1.b
+There are 53 variables.
+```{r}
+names(data)
+length(names(data))
+```
+Question 2.2.2.a
+```{r}
+sorted1 <- data[order(data$par_q1),]
+#These are the colleges with lowest par_q1
+print(sorted1[1:10,c("name","par_q1")])
+#These are the colleges with highest par_q1
+print(sorted1[2193:2202,c("name","par_q1")])
+```
+Question 2.2.2.b
+Yale has second lowest success rate among the four.
+```{r}
+data[data$name %in% c("Cornell University", "Princeton University",
+                    "Yale University", "Quinnipiac University"), c("name","kq5_cond_parq1")]
+```
+Question 2.2.2.c
+The higher the access rate, the lower the success rate, implying that access rate is negatively correlated with success rate. There are very few colleges who do well on both access and success rates. Most do very poorly on both metrics. 
+```{r}
+plot(data$par_q1, data$kq5_cond_parq1, xlab = "Access Rate", ylab = "Success Rate", 
+     main = "Access Rate vs Success Rate")
+```
+
+Question 2.2.2.d
+Min, Max, Mean, Median all shown below.
+```{r}
+data$mr_kq5_pq1 <- data$par_q1*data$kq5_cond_parq1
+summary(data$mr_kq5_pq1)
+```
+
+Question 2.2.2.e
+```{r}
+sorted2 <- data[order(data$mr_kq5_pq1),]
+#Here are the highest 10
+print(sorted2[2193:2202,c("name","mr_kq5_pq1")])
+# Here are the lowest 10
+print(sorted2[1:10,c("name","mr_kq5_pq1")])
+```
+
+Question 2.2.2.f
+Yale is second highest in mobility compared to the four.
+```{r paged.print=TRUE}
+sorted2[sorted2$name %in% c("Cornell University", "Princeton University", 
+                          "Yale University", "Quinnipiac University"), c("name", "mr_kq5_pq1")]
+```
+
+Question 2.3.1
+```{r}
+table1 <- as.data.frame(table(data$type))
+rownames(table1) = c("public", "private non-profit", "for-profit")
+colnames(table1) = c("Var1","Freq")
+print(table1)
+table1 <- table1[-c(3,4)]
+```
+Question 2.3.2
+```{r}
+table1$mobility <- 1
+table1[1,3] <- mean(data[data$type == 1,]$mr_kq5_pq1, na.rm = TRUE)
+table1[2,3] <- mean(data[data$type == 2,]$mr_kq5_pq1, na.rm = TRUE)
+table1[3,3] <- mean(data[data$type == 3,]$mr_kq5_pq1, na.rm = TRUE)
+print(table1)
+
+```
+Question 2.3.3
+```{r}
+print(sorted2[2193:2202,c("name","tier_name")])
+```
+Question 2.3.4
+From 2.3.2, we found that public colleges have the highest mobility rate among the three "types". In addition, we find in 2.3.3 that Selective public colleges dominate the 10 colleges with the highest mobility. Therefore I think that public "type" colleges have the most contribution to mobility.

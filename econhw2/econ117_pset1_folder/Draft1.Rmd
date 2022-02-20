@@ -1,0 +1,247 @@
+---
+title: "PSET1_Econ117"
+author: Aldrin Aujero
+date: 1-30-2022
+output: pdf_document
+---
+rm(list = ls())  
+setwd(/Users/aldrin/Desktop/econ117_pset1_folder)
+
+Part 1  
+
+Question 1
+```{r}
+
+```
+![](/Users/aldrin/Desktop/econ117_pset1_folder/img1)
+
+Question 2
+```{r}
+d <- rnorm(100)
+print(head(d))
+e <- seq.int(1,100)
+```
+
+Question 3
+```{r}
+draws2 <- cbind(c(d),c(e))
+print(tail(draws2))
+```
+
+Question 4
+```{r}
+plot(draws2)
+```
+
+Question 5
+```{r}
+d[3] <- 100
+print(d[1:5])
+```
+Part 2  
+
+Question 1
+```{r}
+getwd()
+```
+
+Question 2
+```{r}
+setwd("~/Desktop/econ117_pset1_folder")
+```
+Question 3
+```{r}
+list.files()
+```
+Question 4
+```{r}
+data <- read.csv("income_shares_USA.csv")
+names(data)
+```
+Question 5
+```{r}
+plot(data$year,data$p0p50)
+```
+In the last 50 years, the share of income accounted for by the poorest Americans has been decreasing.
+
+Question 6
+```{r}
+plot(data$year,data$p99p100)
+```
+In the last 50 years, the share of income accounted for by the richest Americans has been increasing. 
+
+Question 7
+```{r}
+```
+I think that income inequality has been increasing over the last 50 years in the US according to the data. This 
+is because the poorest Americans have been receiving decreasing share of income while the richest Americans
+have been receiving increasing share of income.   
+Code from econ117_pset1_scriptA.R
+```{r}
+#=======================================================
+#
+# Econ 117 Spring 2022
+# Author: Nicholas Ryan & John Eric Humphries
+#         edited January 2022 by Vladimir Smirnyagin
+#
+# Notes: This script is a simple script to practice opening
+#        and running R scripts (i.e. files that end in .R)
+#        in Rstudio And a few exercises to get used to Rstudio.
+#
+#========================================================
+
+#==========
+# Simple variable assignment and math
+#==========
+x <- 2      # define variable x and set it equal to 2
+y <- 3      # define variable y and set it equal to 3
+z <- x + y  # define z as the sum of x and y
+print(z)    # print your results
+
+#==========
+# Generating Random Numbers
+#==========
+a <- rnorm(100)  # generate a vector of 100  random numbers
+head(a)          # show the first 6 entries in a
+b <- rnorm(100)  # generate another vector of 100 random numbers
+
+
+draws <- cbind(a,b) # creates a matrix containg the a and b vectors as columns.
+
+#========
+# Checking plots
+#========
+plot(draws)     # plot draws.
+
+
+#===========
+#  Additional Tasks
+#===========
+
+#  --- 1 ----
+#  After you have run this code, take a screen shot (or a photo) of your screen showing Rstudio,
+#        this code, and the plot it produced
+
+# --- 2 ---
+# create a new vector "d" of 100 random numbers
+# Print the the first 6 values using the head() command and include them in your pset
+# create a new vector "e" that contains the numbers 1 to 100 (hint, use ":" or the "seq()" commands)
+d <- rnorm(100)
+print(head(d))
+e <- seq.int(1,100)
+
+# --- 3 ---
+# create a new matrix "draws2" containing  the vectors "d" and "e" as columns.
+# Print the last 6 rows using the tail() command and include them in your pset
+draws2 <- cbind(c(d),c(e))
+print(tail(draws2))
+
+# --- 4 ---
+# plot draws 2, save the figure and include it in your pset.
+# Note you can save or copy the file using the "Export" button above the plot.       
+plot(draws2)
+
+# --- 5 ---
+# Replace the third entry in the vector "d" with the number "100"
+# Print the first five values of d and include in your pset
+d[3] <- 100
+print(d[1:5])
+# --- 6 ---
+# Save this R script with your answers to 1-5 above and submit it with pset 1.
+```    
+  
+  Code from econ117_pset1_scriptB.R  
+```{r}
+#=======================================================
+#
+# Econ 117 Lessons on working directory, Spring 2022.
+# Authors: Jaime Arellano-Bover and Vladimir Smirnyagin
+#
+# Notes: This is a simple script meant to understand the
+#         concept of working directory, how to set it up,
+#         how to load a data set from it and produce simple graphs
+#========================================================
+
+# Whenever you want to load a data set, R will need to know
+# which is the folder in our computer where it should look for the
+# file. When working with R, we set up a "working directory". The
+# working directory is the folder in which R looks for files to
+# load (and where it saves output such as figures). The questions
+# below will familiarize you with using a working directory.
+#===========
+#  Tasks
+#===========
+
+# --- 1 ----
+# Even if you haven't specified one yet, R has a default working directory.
+# At any time you can figure out which is your current working directory
+# using the getwd() command. Print your current working directory using
+# the getwd() command and include it in your pset.
+getwd()
+# --- 2 ----
+# As you can see in the previous question, the working directory is
+# indexed by a path. A path is a sequence of folders that
+# lead up to a given folder. Using the setwd() command, make the folder
+# econ117_pset1_folder your new working directory.
+# [hint: when writing the path inside the brackets of setwd()
+# you should use quotation marks ""]
+# [hint: In Rstudio you can choose Session -> Set Working Directory -> Choose Directory
+# to choose a working directory by hand. This will also run the
+# corresponding setwd() command.]
+setwd("~/Desktop/econ117_pset1_folder")
+
+
+# --- 3 ----
+# Download the data file income_shares_USA.csv from the 
+# Problem Set 1 page under assignments.  Move
+# this file to the folder econ117_pset1_folder. The list.files()
+# command allows you to list all the files in your working directory.
+# Use the list.files() command to print the contents of your working
+# directory and include it in your pset...!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+list.files()
+
+# --- 4 ----
+# Load the income_shares_USA.csv data set from Canvas using
+# the read.csv() command. # [Hint: this can also be done with the "Import Dataset" 
+# button in the "Environment" tab of Rstudio, and will generate the command as well.]
+# [Hint: you can assign a name to you dataset by typing
+# dataset_name <- read.csv(), where "dataset_name" is a name of your choice].
+# Print the list of variable names
+# of the data set using the names() command and include it in your pset...!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# DATASOURCE: https://wid.world/data/
+data <- read.csv("income_shares_USA.csv")
+names(data)
+
+
+# --- 5 ---
+# Using plot() command, produce a plot of the income share accounted for by the
+# bottom 50% of the income distribution (variable p0p50) over years. Save the graph and 
+# include it in your pset. [Hint: you can plot variable X of dataset "dataset_name"
+# against variable Y by typing plot(dataset_name$Y,dataset_name$X)].
+# [Hint: you can save the graph by clicking "Export" button located right above the graph.]
+# Describe what happened with the share of income accounted for by the poorest Americans
+# over the last 50 years (1 sentence).
+plot(data$year,data$p0p50)
+# In the last 50 years, the share of income accounted for by the poorest Americans has been decreasing.
+
+# --- 6 ---
+# Produce a plot of the income share accounted for by the
+# top 1% of the income distribution (variable p99p100). Save the graph and 
+# include it in your pset.  
+# Describe what happened with the share of income accounted for by the richest Americans
+# over the last 50 years (1 sentence).
+plot(data$year,data$p99p100)
+# In the last 50 years, the share of income accounted for by the richest Americans has been increasing. 
+
+# --- 7 ---
+# Using max 3 sentences, describe what you think happened with income inequality
+# in the US over the last 50 years. Refer to the results you obtained in (5) and (6)
+# while answering this question.
+
+# I think that income inequality has been increasing over the last 50 years in the US according to the data. This 
+# is because the poorest Americans have been receiving decreasing share of income while the richest Americans
+# have been receiving increasing share of income. 
+# --- 8 ---
+# Save this R script with your answers to 1-7 above and submit it with pset 1.
+# All done. 
+```
